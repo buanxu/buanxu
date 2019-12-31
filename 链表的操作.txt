@@ -1,0 +1,183 @@
+链表的几种操作
+
+1、求链表长度
+int   LinkList_length (LinkList  L)
+{
+ 
+	int count=0;
+	LNode * p=NULL;
+	p=L;
+	while(p!=NULL)
+	{
+	     p=p->next;
+	     count++;
+	}
+	return count;
+}
+
+
+2、输出链表
+void   Print_LinkList (LinkList   L)
+{
+         LNode *p;
+         p=L;
+         while(p  != NULL)
+         {          
+              printf("%d",p->data);  
+              p=p->next;
+         }
+}
+
+3、销毁链表
+void     Destroy_LinkList (LinkList   L)
+{
+         LNode *p,*q;
+         p=L;
+         while(p  != NULL)
+         {     q=p;
+               p=p->next;
+               free(q);
+         }
+}
+
+4、判断链表是否为空表
+int    EmptyList  (LinkList   L)
+{
+       if(L->next ==NULL)
+                   return 1;
+       else
+                   return 0;
+}
+
+5、按序号查找
+LinkList    Get(LinkList L,int i)
+{
+        LNode *p;
+        int     j=0;
+        if(  EmptyList(L)  )
+                         return NULL;
+        if(i<1)
+                      return NULL;    
+        p=L;
+        while(p->next  != NULL&& j<i)
+         {   
+               p=p->next;
+               j++;
+         }
+         if (j==i)    return p;
+         else        return   NULL;
+}
+
+6、按内容查找
+LinkList    Search (LinkList L,  int x)
+{
+         LNode *p;
+         p=L;
+         while( p )
+         {      
+                 if(p->data != x)
+                           p=p->next;
+                 else
+                          break;
+         }
+         return p;
+}
+
+7、逆置链表
+LinkList    ReverseList (LinkList L)
+{
+            LNode *pre,*cur,*net;
+            pre=L ;
+            cur=pre->next;
+            while(cur->next != NULL)
+            {
+                 net=cur->next;
+                 cur->next=pre;
+                 pre=cur;
+                 cur=net;
+            }
+            L->next->=NULL;
+            L->next=cur;
+            return  L;
+}
+
+	s=ReverseList (a);
+	do{ 
+		printf("%d  ",s->next->data);
+        s=s->next;
+	}while(s!=a);
+
+
+
+8、链表的插入
+int    InsertList  (LinkList   L, int i, int e)
+{    
+         int    j=0;
+         LNode *p,*s;
+         p=L;
+         while(p  && j<i-1)
+         {
+               p=p->next;
+               j++;
+         }
+         if(!p || j>i-1)
+         {
+             printf("插入位置错误")；
+             return  0;
+         }
+         s=(LinkList)malloc(sizeof(LNode));
+         s->data=e;
+         s->next=p->next;
+         p->next=s;
+         return  1;
+}
+
+9、删除结点
+int    DeleteList  (LinkList   L, int i, int *e)
+{
+
+         int    j=0;
+         LNode *p,*q;
+         p=L;
+         while(p->next !=NULL  && j<i-1)
+         {
+               p=p->next;
+               j++;
+         }
+         if ( !(p->next) || j>i-1)
+         {
+             printf("删除位置错误")；
+             return  0;
+         }
+         q=p->next;
+         p->next=q->next;
+         e=q->data;
+         free(q);
+         return  L;
+}
+
+ 10、清空链表
+
+void     Clear_LinkList (LinkList  L)
+{  
+	     LNode * p=NULL;
+		 p=L;
+		 if(p->next == NULL)
+		 {
+			 
+			 printf("链表为空\n ");
+			 exit(-1);
+			 
+		 }
+	
+	     p->next=NULL;
+}     
+     
+        
+         
+         
+
+
+
+
+

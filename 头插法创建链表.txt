@@ -1,0 +1,87 @@
+     头插法创建链表
+1、用结束标志flag创建链表                             //头插法创建链表都需要建立表头
+
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct LNode
+{
+	int data;
+    struct LNode *next;
+}LNode,*LinkList;
+
+LinkList create_LinkList()
+{  
+	   LinkList L;
+       int  e,flag=-1;
+       LNode * p=NULL;
+       L=(LinkList)malloc(sizeof(LNode));
+       L->next=NULL;
+       scanf("%d",&e);
+       while(e!=flag)
+       {
+          p=(LinkList)malloc(sizeof(LNode));
+          p->data=e;
+          p->next=L->next;
+          L->next=p;
+          p=p->next;
+          scanf("%d",&e);
+       }
+       return L;
+} 
+main()
+{
+    LinkList p;
+    p=create_LinkList();
+    p=p->next;
+    while(p!=NULL)
+	{
+       printf("%d ",p->data);
+	   p=p->next ;
+	}
+    printf("\n");
+	return 0;
+}
+
+
+2、已知结点个数N创建链表
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#define N  5
+typedef struct LNode
+{
+	int data;
+    struct LNode *next;
+}LNode,*LinkList;
+
+LinkList create_LinkList(int n)
+{  
+	   LinkList L;
+       int  i;
+       LNode * p=NULL;
+       L=(LinkList)malloc(sizeof(LNode));
+       L->next=NULL;
+       for(i=1;i<=N;i++)
+       {
+          p=(LinkList)malloc(sizeof(LNode));
+          scanf("%d",&p->data);
+          p->next=L->next;
+          L->next=p;
+          p=p->next;
+       }
+       return L;
+} 
+main()
+{
+    LinkList p;
+    p=create_LinkList(N);
+    p=p->next;
+    while(p!=NULL)
+	{
+       printf("%d ",p->data);
+	   p=p->next ;
+	}
+    printf("\n");
+	return 0;
+}
